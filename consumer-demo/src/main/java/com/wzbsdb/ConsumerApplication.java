@@ -1,7 +1,7 @@
 package com.wzbsdb;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,7 +12,10 @@ import org.springframework.web.client.RestTemplate;
  * @create 2018/11/4
  * @since 1.0.0
  */
-@SpringBootApplication
+//@EnableDiscoveryClient
+//@SpringBootApplication
+//@EnableCircuitBreaker
+@SpringCloudApplication
 public class ConsumerApplication {
 
     @Bean

@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `tb_user`;
 CREATE TABLE `tb_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(100) DEFAULT NULL COMMENT '用户名',
