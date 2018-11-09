@@ -1,15 +1,13 @@
 package com.wzbsdb.consumer.controller;
 
-import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.wzbsdb.consumer.client.UserClient;
+import com.wzbsdb.consumer.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * 〈一句话功能简述〉<br>
@@ -22,27 +20,35 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 @RestController
 @RequestMapping("consumer")
-@DefaultProperties(defaultFallback= "queryUserByIdFallback")
+//@DefaultProperties(defaultFallback= "queryUserByIdFallback")
 public class UserController {
+//    @Autowired
+//    private RestTemplate restTemplate;
+
+//    @Autowired
+//    private DiscoveryClient discoveryClient;
 
     @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
-    private DiscoveryClient discoveryClient;
+    private UserClient userclient;
 
     @GetMapping("{id}")
-    @HystrixCommand
-    public String queryById(@PathVariable("id") Long id) {
-        long begin = System.currentTimeMillis();
-        // 地址直接写服务名称即可
-        String baseUrl = "http://user-service/user/" + id;
-        String user = restTemplate.getForObject(baseUrl, String.class);
-        long end = System.currentTimeMillis();
-        // 记录访问用时：
-        log.info("访问用时：{}", end - begin);
+    public User queryById(@PathVariable("id") Long id){
+        User user = userclient.queryById(id);
         return user;
     }
+
+//    @GetMapping("{id}")
+//    @HystrixCommand
+//    public String queryById(@PathVariable("id") Long id) {
+//        long begin = System.currentTimeMillis();
+//        // 地址直接写服务名称即可
+//        String baseUrl = "http://user-service/user/" + id;
+//        String user = restTemplate.getForObject(baseUrl, String.class);
+//        long end = System.currentTimeMillis();
+//        // 记录访问用时：
+//        log.info("访问用时：{}", end - begin);
+//        return user;
+//    }
 
     public String queryUserByIdFallback(){
         return "超时";
