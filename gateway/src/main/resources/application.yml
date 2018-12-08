@@ -13,15 +13,15 @@ zuul:
   #ignored-services:
   #  - consumer-service    去除不需要暴露的服务
 ribbon:
-  ConnectTimeout: 250 # 连接超时时间(ms)
-  ReadTimeout: 2000 # 通信超时时间(ms)
-  OkToRetryOnAllOperations: true # 是否对所有操作重试
-  MaxAutoRetriesNextServer: 2 # 同一服务不同实例的重试次数
-  MaxAutoRetries: 1 # 同一实例的重试次数
+  ConnectTimeout: 500 # 连接超时时间(ms)
+  ReadTimeout: 4000 # 通信超时时间(ms)
+#  OkToRetryOnAllOperations: true # 是否对所有操作重试
+#  MaxAutoRetriesNextServer: 2 # 同一服务不同实例的重试次数
+#  MaxAutoRetries: 1 # 同一实例的重试次数
 hystrix:
   command:
     default:
       execution:
         isolation:
           thread:
-            timeoutInMillisecond: 6000 # 熔断超时时长：6000ms
+            timeoutInMilliseconds: 6000 # 设置hystrix的超时时间为6000ms

@@ -7,9 +7,13 @@ eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:10086/eureka
-user-service:
-  ribbon:
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+feign:
+  hystrix:
+    enabled: true # 开启Feign的熔断功能
+ribbon:
+  ConnectTimeout: 250
+  ReadTimeout: 3000
+#  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 hystrix:
   command:
     default:
@@ -17,6 +21,3 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 6000 # 设置hystrix的超时时间为6000ms
-feign:
-  hystrix:
-    enabled: true # 开启Feign的熔断功能

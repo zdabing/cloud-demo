@@ -6,7 +6,6 @@ import com.netflix.zuul.exception.ZuulException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * @create 2018/11/9
  * @since 1.0.0
  */
-@Component
+//@Component
 public class LoginFilter extends ZuulFilter {
     @Override
     public String filterType() {
